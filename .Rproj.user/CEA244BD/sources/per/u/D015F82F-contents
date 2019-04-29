@@ -1,0 +1,23 @@
+library(ggplot2)
+library(readxl)
+library(nordest)
+
+contribuicoes <- read_excel("contribuicoes_pr.xlsx",sheet = "Planilha3")
+
+ad.test(contribuicoes$commits)
+ad.test(contribuicoes$additions)
+ad.test(contribuicoes$deletions)
+ad.test(contribuicoes$changed_files)
+
+#teste T
+teste_commit <- wilcox.test(contribuicoes$commits~contribuicoes$Classification, paired=F, conf.level=0.95)
+teste_commit
+
+teste_additions <- wilcox.test(contribuicoes$additions~contribuicoes$Classification, paired=F, conf.level=0.95)
+teste_additions
+
+teste_deletions <- wilcox.test(contribuicoes$deletions~contribuicoes$Classification, paired=F, conf.level=0.95)
+teste_deletions
+
+teste_changed <- wilcox.test(contribuicoes$changed_files~contribuicoes$Classification, paired=F, conf.level=0.95)
+teste_changed
